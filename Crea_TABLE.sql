@@ -3,13 +3,14 @@ CREATE TABLE Autors (
   Id_autors INT, 
   Name_autors VARCHAR2(100), 
   Surname_autors VARCHAR2(100), 
+  Birthday DATE,
   CONSTRAINT PK_Autors PRIMARY KEY (Id_autors));
   
 DROP TABLE Editors CASCADE CONSTRAINTS;
 CREATE TABLE Editors (
   Name_editors VARCHAR2(100), 
   Adresse VARCHAR2(255), 
-  Phone_number INT, 
+  Phone_number VARCHAR2(50), 
   CONSTRAINT PK_Editors PRIMARY KEY (Name_editors)); 
   
 DROP TABLE Key_words CASCADE CONSTRAINTS;
@@ -87,4 +88,12 @@ CREATE TABLE Videos (
   Document_Id INT,
   CONSTRAINT PK_Videos PRIMARY KEY (Id_videos),
   CONSTRAINT FK_Videos_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
+  
+commit;
+  
+INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
+    VALUES (1 , 'Joël', 'DICKER',  '16/06/1985') ;
+    
+INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
+    VALUES ('Edition de Fallois', '22 Rue la Boétie 75008 Paris' ,  '01 42 66 91 95') ;
   
