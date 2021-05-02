@@ -46,12 +46,12 @@ CREATE TABLE Documents (
   Shelf VARCHAR2(255), 
   Phone_number INT,
   Autor_Id INT,
-  Editor_Id INT,
+  Editor_Name VARCHAR2(255),
   Borrow_Id INT,
   Key_word_name VARCHAR2(100),
   CONSTRAINT PK_Documents PRIMARY KEY (Id_documents),
   CONSTRAINT FK_Documents_Autor FOREIGN KEY(Autor_Id) REFERENCES Autors(Id_autors),
-  CONSTRAINT FK_Documents_Editor FOREIGN KEY(Editor_Id) REFERENCES Editors(Name_Editors),
+  CONSTRAINT FK_Documents_Editor FOREIGN KEY(Editor_Name) REFERENCES Editors(Name_Editors),
   CONSTRAINT FK_Documents_Borrow FOREIGN KEY(Borrow_Id) REFERENCES Borrows(Id_borrows),
   CONSTRAINT FK_Documents_Key_word FOREIGN KEY(Key_word_name) REFERENCES Key_words(Name_key_words));
   
@@ -87,3 +87,4 @@ CREATE TABLE Videos (
   Document_Id INT,
   CONSTRAINT PK_Videos PRIMARY KEY (Id_videos),
   CONSTRAINT FK_Videos_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
+  
