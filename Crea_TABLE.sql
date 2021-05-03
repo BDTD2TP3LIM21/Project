@@ -99,7 +99,7 @@ CREATE TABLE Videos (
   CONSTRAINT PK_Videos PRIMARY KEY (Id_videos),
   CONSTRAINT FK_Videos_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
   
--- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vérification de la cohérence de la base =-=-=-=-=-=-=-=-=-=-=-=
+-- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vï¿½rification de la cohï¿½rence de la base =-=-=-=-=-=-=-=-=-=-=-=
 
 -- =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-= Triggers =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-
 
