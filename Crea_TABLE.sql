@@ -183,16 +183,6 @@ select id_video.NEXTVAL INTO :new.id_videos FROM DUAL;
 END;
 /
 
-CREATE SEQUENCE id_borrowers;
-
-create or replace trigger trig_borrower_id
-before insert or update on borrowers
-for each row
-begin
-select id_borrowers.NEXTVAL INTO :new.id_borrower FROM DUAL;
-END;
-/
-
 
 create or replace trigger trig_autors_birthday
 before insert or update on autors
