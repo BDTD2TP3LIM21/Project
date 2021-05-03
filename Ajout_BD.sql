@@ -1,6 +1,6 @@
 /* ----------------------------------------------------------------------------------------------Auteur--------------------------------------------------------------------------------*/
 INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
-    VALUES (1 , 'Joël', 'DICKER',  '16/06/1985');
+    VALUES (1 , 'Joï¿½l', 'DICKER',  '16/06/1985');
 	
 INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
     VALUES (2 , 'Chu', 'GONG',  '23/10/1988');
@@ -18,7 +18,7 @@ INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
     VALUES (6 , 'Jean-Claude', 'NACHON',  '25/05/1963');
 	
 INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
-    VALUES (7 , 'Angélique', 'NACHON',  '09/04/1975');
+    VALUES (7 , 'Angï¿½lique', 'NACHON',  '09/04/1975');
 	
 INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
     VALUES (8 , 'Arnaud', 'VIARD',  '22/08/1965');
@@ -42,7 +42,7 @@ INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
     VALUES (14 , 'Kevin', 'MORBY',  '01/06/1958');
 	
 INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
-    VALUES (15 , 'Timothé', 'MERCADAL',  '29/12/1997');
+    VALUES (15 , 'Timothï¿½', 'MERCADAL',  '29/12/1997');
 	
 INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
     VALUES (16 , 'Katheryn', 'HUDSON',  '25/10/1984');
@@ -65,7 +65,7 @@ INSERT INTO AUTORS(ID_AUTORS ,NAME_AUTORS , SURNAME_AUTORS,  BIRTHDAY)
 /* ----------------------------------------------------------------------------------------------EDITEUR--------------------------------------------------------------------------------*/
     
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES ('Edition de Fallois', '22 Rue la Boétie 75008 Paris' ,  '01 42 66 91 95');
+    VALUES ('Edition de Fallois', '22 Rue la Boï¿½tie 75008 Paris' ,  '01 42 66 91 95');
     
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('DUNOD', '11 Rue Paul Bert 92247 Malakoff' ,  '01 41 23 66 00');
@@ -98,19 +98,19 @@ INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('Differ Ant', '4 rue du haut des sables, Poitiers 86000' ,  '05 49 48 47 46');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES ('Poney Gris', '10 rue de l étang , Plessis-Robinssons 12634' ,  '04 06 93 94 51');
+    VALUES ('Poney Gris', '10 rue de l ï¿½tang , Plessis-Robinssons 12634' ,  '04 06 93 94 51');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES (' Virgin Records', '15 rue de l Hôtel Dieu, Poitiers 86000' ,  '05 49 45 30 00');
+    VALUES (' Virgin Records', '15 rue de l Hï¿½tel Dieu, Poitiers 86000' ,  '05 49 45 30 00');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES ('CANAL+ France', '35 Rue de la Clairière Orléans' ,  '07 15 36 55 89 ');
+    VALUES ('CANAL+ France', '35 Rue de la Clairiï¿½re Orlï¿½ans' ,  '07 15 36 55 89 ');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('Youtube', '65 Rue du Moulin 75000 Paris' ,  '08 09 44 26 14 ');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES ('Tev & Louis', '901 Cherry Ave – San Bruno, CA 94066' ,  '1 650-253-0000');
+    VALUES ('Tev & Louis', '901 Cherry Ave ï¿½ San Bruno, CA 94066' ,  '1 650-253-0000');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('Vortex', 'Arte 8 r Marceau, 92130 Issy les Moulineaux' ,  '01 55 00 77 77');
@@ -130,10 +130,10 @@ INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, 
     VALUES (5, 'Marcel', 'Pontans', '77 rue du pont St Marc', '07 50 06 35 86', 'Public');
 
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
-    VALUES (6, 'David', 'Newell', '789 avenue de l`hôtel Aurore', '04 12 68 29 48', 'Personnel');
+    VALUES (6, 'David', 'Newell', '789 avenue de l`hï¿½tel Aurore', '04 12 68 29 48', 'Personnel');
 
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
-    VALUES (7, 'Léa', 'Lanau', '231 boulevard de l`obellisque', '07 52 21 23 55', 'Public');
+    VALUES (7, 'Lï¿½a', 'Lanau', '231 boulevard de l`obellisque', '07 52 21 23 55', 'Public');
 
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
     VALUES (8, 'Marine', 'Picon', '14 rue Jean-Charles Vaint', '06 30 51 45 26', 'Public');
@@ -148,13 +148,13 @@ INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, 
     VALUES (11, 'Arthur', 'Chevallais', '78 boulevard du vieux port', '08 09 75 15 29', 'Public');
 
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
-    VALUES (12, 'Elène', 'Francine', '11 chemin de l`ancien moulin', '05 22 64 18 22', 'Public');
+    VALUES (12, 'Elï¿½ne', 'Francine', '11 chemin de l`ancien moulin', '05 22 64 18 22', 'Public');
 
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
     VALUES (13, 'Esteban', 'Lovreau', '98 rue du potiron', '07 09 88 51 88', 'Public');
  
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWERS, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
-    VALUES (14, 'Anaïs', 'Sarone', '191 rue du pont St Marc', '07 88 09 77 48', 'Personnel');
+    VALUES (14, 'Anaï¿½s', 'Sarone', '191 rue du pont St Marc', '07 88 09 77 48', 'Personnel');
 
 INSERT INTO BORROWERS(ID_BORROWERS, NAME_BORROWERS, SURNAME_BORROWSER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
     VALUES (15, 'Alain', 'Tarn', '142 rue du petit pont', '02 52 68 54 25', 'Professionnel');
