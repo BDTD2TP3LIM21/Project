@@ -8,7 +8,8 @@ CREATE TABLE Autors (
   
 DROP TABLE Key_words CASCADE CONSTRAINTS;
 CREATE TABLE Key_words (
-  Name_key_words VARCHAR2(100));
+  Name_key_words VARCHAR2(100),
+  CONSTRAINT PK_Key_words PRIMARY KEY(Name_key_words));
   
 DROP TABLE Described CASCADE CONSTRAINTS;
 CREATE TABLE Described (
@@ -16,13 +17,13 @@ CREATE TABLE Described (
   Key_Word VARCHAR2(100),
   CONSTRAINT PK_Described PRIMARY KEY (Documents, Key_Word),
   CONSTRAINT FK_Described_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents),
-  CONSTRAINT FK_Described_Key_words FOREIGN KEY (Key_words) REFERENCES Documents(Name_key_words));
+  CONSTRAINT FK_Described_Key_words FOREIGN KEY (Key_Word) REFERENCES Key_words(Name_key_words));
   
 DROP TABLE Wrote CASCADE CONSTRAINTS;
 CREATE TABLE Wrote (
   Documents INT,
   Author INT,
-  CONSTRAINT PK_Wrote PRIMARY KEY (Documents, Authors),
+  CONSTRAINT PK_Wrote PRIMARY KEY (Documents, Author),
   CONSTRAINT FK_Wrote_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents),
   CONSTRAINT FK_Wrote_Authors FOREIGN KEY (Author) REFERENCES Autors(Id_autors));
 
