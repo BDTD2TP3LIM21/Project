@@ -40,15 +40,6 @@ CREATE TABLE Borrowers (
   CONSTRAINT PK_Borrowers PRIMARY KEY (Id_borrower),
   CONSTRAINT FK_Borrowers_Categories FOREIGN KEY(Name_categorie) REFERENCES Categories(Name_categories));
   
-DROP TABLE Borrows CASCADE CONSTRAINTS;
-CREATE TABLE Borrows (
-  Id_Borrows INT,
-  Begin_borrow DATE,
-  End_borrow DATE,
-  Borrower INT,
-  CONSTRAINT PK_Borrows PRIMARY KEY (Id_Borrows),
-  CONSTRAINT FK_Borrows_Borrower FOREIGN KEY (Borrower) REFERENCES Borrowers(Id_borrower));
-  
 DROP TABLE Documents CASCADE CONSTRAINTS;
 CREATE TABLE Documents (
   Id_documents INT, 
@@ -58,8 +49,8 @@ CREATE TABLE Documents (
   Editor VARCHAR2(255),
   CONSTRAINT PK_Documents PRIMARY KEY (Id_documents),
   CONSTRAINT FK_Documents_Editor FOREIGN KEY(Editor) REFERENCES Editors(Name_Editors));
-  
-  DROP TABLE Described CASCADE CONSTRAINTS;
+
+DROP TABLE Described CASCADE CONSTRAINTS;
 CREATE TABLE Described (
   Documents INT,
   Key_Word VARCHAR2(100),
@@ -75,6 +66,17 @@ CREATE TABLE Wrote (
   CONSTRAINT PK_Wrote PRIMARY KEY (Documents, Author),
   CONSTRAINT FK_Wrote_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents),
   CONSTRAINT FK_Wrote_Authors FOREIGN KEY (Author) REFERENCES Autors(Id_autors));
+  
+  
+DROP TABLE Borrows CASCADE CONSTRAINTS;
+CREATE TABLE Borrows (
+  Borrower INT,
+  Documents INT,
+  Begin_borrow DATE,
+  End_borrow DATE,
+  CONSTRAINT PK_Borrows PRIMARY KEY (Borrower, Documents, Begin_borrow, End_borrow),
+  CONSTRAINT FK_Borrows_Borrower FOREIGN KEY (Borrower) REFERENCES Borrowers(Id_borrower),
+  CONSTRAINT FK_Borrows_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents));
   
 DROP TABLE Books CASCADE CONSTRAINTS;
 CREATE TABLE Books (
