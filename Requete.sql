@@ -62,3 +62,28 @@ WHERE borrowers.adresse IN (
 -- 11 --
 
 SELECT documents.
+
+/*10-*/
+SELECT editor
+FROM DOCUMENTS
+WHERE theme LIKE '%informatique'
+group by editor
+HAVING COUNT(*) < 1;
+
+/*12-*/
+SELECT D1.title
+FROM DOCUMENTS D1
+WHERE D1.id_documents NOT IN (
+    SELECT D2.id_documents  
+    FROM DOCUMENTS D2, BORROWS B
+    WHERE D2.id_doccuments = B.documents
+    );
+    
+/*14-*/
+SELECT D1.title
+FROM DOCUMENTS D1
+WHERE D1.id_documents NOT IN (
+    SELECT D2.id_documents  
+    FROM DOCUMENTS D2, BORROWS B
+    WHERE D2.borrow_id = B.id_borrows
+    );
