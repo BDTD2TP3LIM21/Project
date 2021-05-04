@@ -6,18 +6,33 @@ CREATE TABLE Autors (
   Birthday DATE,
   CONSTRAINT PK_Autors PRIMARY KEY (Id_autors));
   
+DROP TABLE Key_words CASCADE CONSTRAINTS;
+CREATE TABLE Key_words (
+  Name_key_words VARCHAR2(100));
+  
+DROP TABLE Described CASCADE CONSTRAINTS;
+CREATE TABLE Described (
+  Documents INT,
+  Key_Word VARCHAR2(100),
+  CONSTRAINT PK_Described PRIMARY KEY (Documents, Key_Word),
+  CONSTRAINT FK_Described_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents),
+  CONSTRAINT FK_Described_Key_words FOREIGN KEY (Key_words) REFERENCES Documents(Name_key_words));
+  
+DROP TABLE Wrote CASCADE CONSTRAINTS;
+CREATE TABLE Wrote (
+  Documents INT,
+  Author INT,
+  CONSTRAINT PK_Wrote PRIMARY KEY (Documents, Authors),
+  CONSTRAINT FK_Wrote_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents),
+  CONSTRAINT FK_Wrote_Authors FOREIGN KEY (Author) REFERENCES Autors(Id_autors));
+
 DROP TABLE Editors CASCADE CONSTRAINTS;
 CREATE TABLE Editors (
   Name_editors VARCHAR2(100), 
   Adresse VARCHAR2(255), 
   Phone_number VARCHAR2(50), 
-  CONSTRAINT PK_Editors PRIMARY KEY (Name_editors)); 
-  
-DROP TABLE Key_words CASCADE CONSTRAINTS;
-CREATE TABLE Key_words (
-  Name_key_words VARCHAR2(100), 
-  CONSTRAINT PK_Key_Words PRIMARY KEY (Name_key_words));
-  
+  CONSTRAINT PK_Editors PRIMARY KEY (Name_editors));
+
 DROP TABLE Categories CASCADE CONSTRAINTS;
 CREATE TABLE Categories (
   Name_categories VARCHAR2(255),
@@ -41,12 +56,12 @@ CREATE TABLE Borrowers (
   
 DROP TABLE Borrows CASCADE CONSTRAINTS;
 CREATE TABLE Borrows (
-    Id_Borrows INT,
-    Begin_borrow DATE,
-    End_borrow DATE,
-    Borrower,
-    CONSTRAINT PK_Borrows PRIMARY KEY (Id_Borrows),
-    CONSTRAINT FK_Borrows_Borrower FOREIGN KEY(Borrower) REFERENCES Borrowers(Id_borrower));
+  Id_Borrows INT,
+  Begin_borrow DATE,
+  End_borrow DATE,
+  Borrower INT,
+  CONSTRAINT PK_Borrows PRIMARY KEY (Id_Borrows),
+  CONSTRAINT FK_Borrows_Borrower FOREIGN KEY (Borrower) REFERENCES Borrowers(Id_borrower));
   
 DROP TABLE Documents CASCADE CONSTRAINTS;
 CREATE TABLE Documents (
@@ -54,15 +69,11 @@ CREATE TABLE Documents (
   Title VARCHAR2(255),
   Theme VARCHAR2(255),
   Shelf VARCHAR2(255),
-  Autor_Id INT,
   Editor VARCHAR2(255),
   Borrow_Id INT,
-  Key_word_name VARCHAR2(100),
   CONSTRAINT PK_Documents PRIMARY KEY (Id_documents),
-  CONSTRAINT FK_Documents_Autor FOREIGN KEY(Autor_Id) REFERENCES Autors(Id_autors),
   CONSTRAINT FK_Documents_Editor FOREIGN KEY(Editor) REFERENCES Editors(Name_Editors),
-  CONSTRAINT FK_Documents_Borrow FOREIGN KEY(Borrow_Id) REFERENCES Borrows(Id_Borrows),
-  CONSTRAINT FK_Documents_Key_word FOREIGN KEY(Key_word_name) REFERENCES Key_words(Name_key_words));
+  CONSTRAINT FK_Documents_Borrow FOREIGN KEY(Borrow_Id) REFERENCES Borrows(Id_Borrows));
   
 DROP TABLE Books CASCADE CONSTRAINTS;
 CREATE TABLE Books (
@@ -409,7 +420,47 @@ INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHO
 
 INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
     VALUES (0, 'Alain', 'Tarn', '142 rue du petit pont', '02 52 68 54 25', 'Professionnel');
+    
+-- Parties Documents --
 
+-- CD
+
+INSERT INTO CD(ID_CD, DURATION_CD, NB_SUBTITLES, DOCUMENT_ID)
+    VALUES (0, 43.24 , 10, 11);
+
+INSERT INTO CD(ID_CD, DURATION_CD, NB_SUBTITLES, DOCUMENT_ID)
+    VALUES (0, 33.56, 8, 12);
+    
+INSERT INTO CD(ID_CD, DURATION_CD, NB_SUBTITLES, DOCUMENT_ID)
+    VALUES (0, 12.21, 8, 13);
+    
+INSERT INTO CD(ID_CD, DURATION_CD, NB_SUBTITLES, DOCUMENT_ID)
+    VALUES (0, 77, 13, 14);
+    
+INSERT INTO CD(ID_CD, DURATION_CD, NB_SUBTITLES, DOCUMENT_ID)
+    VALUES (0, 1.32, 1, 15);
+
+-- Vidéo
+
+INSERT INTO VIDEOS(ID_VIDEOS, DURATION_VIDEO, EXTENSION, DOCUMENT_ID)
+    VALUES (0, 1.42, 'mov', 16);
+
+INSERT INTO VIDEOS(ID_VIDEOS, DURATION_VIDEO, EXTENSION, DOCUMENT_ID)
+    VALUES (0, 5.54, 'mp4', 17);
+    
+INSERT INTO VIDEOS(ID_VIDEOS, DURATION_VIDEO, EXTENSION, DOCUMENT_ID)
+    VALUES (0, 8.03, 'mp4', 18);
+    
+INSERT INTO VIDEOS(ID_VIDEOS, DURATION_VIDEO, EXTENSION, DOCUMENT_ID)
+    VALUES (0, 12.55, 'avi', 19);
+    
+INSERT INTO VIDEOS(ID_VIDEOS, DURATION_VIDEO, EXTENSION, DOCUMENT_ID)
+    VALUES (0, 21.12, 'wmv', 20);
+    
+-- Documents
+
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR_NAME, BORROW_ID)
+    
 commit;
 
 
