@@ -149,17 +149,6 @@ select id_borrowers.NEXTVAL INTO :new.id_borrower FROM DUAL;
 END;
 /
 
-DROP SEQUENCE id_borrow;
-CREATE SEQUENCE id_borrow;
-
-create or replace trigger trig_borrows_id
-before insert or update on borrows
-for each row
-begin
-select id_borrow.NEXTVAL INTO :new.id_borrows FROM DUAL;
-END;
-/
-
 DROP SEQUENCE CD_id;
 CREATE SEQUENCE CD_id;
 
@@ -338,7 +327,7 @@ INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('Les productions de la Lanterne', '8 AV LA PORTE DE MONTROUGE, 75014 PARIS' ,  '06 36 30 36 30');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES ('Gaumont Adresse', '30 avenue Charles de Gaulle Nantes 44300' ,  '05 83 12 32 55');
+    VALUES ('Gaumont', '30 avenue Charles de Gaulle Nantes 44300' ,  '05 83 12 32 55');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('Columbia pictures', 'Thalberg Building, 10202 West Washington Boulevard, Culver City, California , United States' ,  '08 98 48 16 67');
@@ -489,7 +478,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 155, 'EYROLLES');
    
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (4, 'SOLO LEVELING', 'Manga', 152, 'D&C Media');
+    VALUES (4, 'SOLO LEVELING', 'Manga', 152, 'DNC media');
   
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (5, 'TRAITE DE PEDAGOGIE', 'Philosophie', 154, 'Hachette');
@@ -534,10 +523,10 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (18, 'Les nouveaux capitaliste', 'Documentaire', 353, 'Poney Gris');
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (19, 'Le couscous au japon', 'Comédie', 352, 'Tev & Louis');
+    VALUES (19, 'Le couscous au japon', 'Comédie', 352, 'Tev and Louis');
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (20, 'Tu n`es pas le centre du monde', 'Éducatif', 354, 'Vortex - Arte');
+    VALUES (20, 'Tu n`es pas le centre du monde', 'Éducatif', 354, 'Vortex');
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (21, 'LE SILENCE DE LA MER', 'Biographie' , 432, 'Expand Drama');
