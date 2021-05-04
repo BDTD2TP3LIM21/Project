@@ -58,3 +58,7 @@ WHERE borrowers.adresse IN (
     FROM BORROWERS
     WHERE borrowers.name_borrower = 'Dupont'
     );
+    
+-- 11 --
+
+SELECT documents.
