@@ -1,3 +1,5 @@
+-- =-=-=-=-=-=-=-=-=-=-=-= Partie 2. Création de la base de données multimédia =-=-=-=-=-=-=-=-=-=-=-= --
+
 DROP TABLE Autors CASCADE CONSTRAINTS;
 CREATE TABLE Autors (
   Id_autors INT, 
@@ -83,16 +85,22 @@ CREATE TABLE Books (
   Id_books INT, 
   Document_Id INT,
   Nb_pages INT,
-  CONSTRAINT PK_Books PRIMARY KEY (Document_Id, Id_books),
+  CONSTRAINT PK_Books PRIMARY KEY (Id_books, Document_Id),
   CONSTRAINT FK_Books_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
+  
+ALTER TABLE Books
+ADD CONSTRAINT UQ_Books_Documents UNIQUE (Document_Id);
 
 DROP TABLE DVD CASCADE CONSTRAINTS;
 CREATE TABLE DVD (
   Id_DVD INT, 
   Document_Id INT,
   Duration_DVD NUMBER(10,2),
-  CONSTRAINT PK_DVD PRIMARY KEY (Document_Id, Id_DVD),
+  CONSTRAINT PK_DVD PRIMARY KEY (Id_DVD, Document_Id),
   CONSTRAINT FK_DVD_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
+  
+ALTER TABLE DVD
+ADD CONSTRAINT UQ_DVD_Documents UNIQUE (Document_Id);
   
 DROP TABLE CD CASCADE CONSTRAINTS;
 CREATE TABLE CD (
@@ -100,8 +108,11 @@ CREATE TABLE CD (
   Document_Id INT,
   Duration_CD NUMBER(10,2),
   Nb_subtitles INT,
-  CONSTRAINT PK_CD PRIMARY KEY (Document_Id, Id_CD),
+  CONSTRAINT PK_CD PRIMARY KEY (Id_CD, Document_Id),
   CONSTRAINT FK_CD_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
+  
+ALTER TABLE CD
+ADD CONSTRAINT UQ_CD_Documents UNIQUE (Document_Id);
   
 DROP TABLE Videos CASCADE CONSTRAINTS;
 CREATE TABLE Videos (
@@ -109,13 +120,15 @@ CREATE TABLE Videos (
   Document_Id INT,
   Duration_Videos NUMBER(10,2),
   Extension VARCHAR2(5),
-  CONSTRAINT PK_Videos PRIMARY KEY (Document_Id, Id_videos),
+  CONSTRAINT PK_Videos PRIMARY KEY (Id_videos, Document_Id),
   CONSTRAINT FK_Videos_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
-
   
--- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vï¿½rification de la cohï¿½rence de la base =-=-=-=-=-=-=-=-=-=-=-=
+ALTER TABLE Videos
+ADD CONSTRAINT UQ_Videos_Documents UNIQUE (Document_Id);
+  
+-- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vï¿½rification de la cohï¿½rence de la base =-=-=-=-=-=-=-=-=-=-=-= --
 
--- =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-= Triggers =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-
+-- =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=- Triggers =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-= --
 DROP SEQUENCE id_autor;
 CREATE SEQUENCE id_autor;
 
@@ -233,7 +246,7 @@ ALTER TABLE Videos
 ADD CONSTRAINT CK_Videos_Extension CHECK (extension ='flv' OR extension ='avi' OR extension = 'mov' OR extension ='mp4' OR extension = 'wmv');
 
 
--- =-=-=-=-=-=-=-=-=-=-=-= Partie 5. Remplissage de la table =-=-=-=-=-=-=-=-=-=-=-=
+-- =-=-=-=-=-=-=-=-=-=-=-= Partie 5. Remplissage de la table =-=-=-=-=-=-=-=-=-=-=-= --
 
 -- Authors 
 
