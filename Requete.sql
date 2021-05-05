@@ -4,7 +4,6 @@
 SELECT TITLE 
 FROM DOCUMENTS
 WHERE Theme LIKE '%Informatique%' OR Theme LIKE '%Mathématiques%'
-GROUP BY TITLE
 ORDER BY title;
 
 -- 2 --
@@ -109,3 +108,25 @@ WHERE DO1.quantity > (
     FROM DOCUMENTS DO2
 )
 ORDER BY DO1.quantity DESC;
+
+/*15-*/
+SELECT name_authors
+FROM AUTHORS A
+WHERE A.id_authors IN (
+    SELECT W.author
+    FROM WROTE W
+    WHERE W.documents IN (
+        SELECT D.id_documents
+        FROM DOCUMENTS D
+        WHERE D.theme LIKE '%Mathématiques%'
+    )
+)
+AND A.id_authors IN (
+    SELECT W.author
+    FROM WROTE W
+    WHERE W.documents IN (
+        SELECT D.id_documents
+        FROM DOCUMENTS D
+        WHERE D.theme LIKE '%Informatique%'
+    )
+);
