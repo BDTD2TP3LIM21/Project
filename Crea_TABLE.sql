@@ -491,7 +491,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
 	
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (27, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
+    VALUES (26, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 155, 'Edition de Fallois');
@@ -503,7 +503,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 154, 'Poney Gris');
 	
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (26, 'Analyse du son au travers des maths', 'Mathématiques', 154, 'Poney Gris');
+    VALUES (27, 'Analyse du son au travers des maths', 'Mathématiques', 154, 'Poney Gris');
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (11, 'With light and with love', 'Musique Rock', 253, 'Differ Ant');
@@ -698,6 +698,9 @@ INSERT INTO BOOKS(ID_BOOKS, DOCUMENT_ID, NB_PAGES)
     VALUES (0, 7, 500);
     
 INSERT INTO BOOKS(ID_BOOKS, DOCUMENT_ID, NB_PAGES)
+    VALUES (0, 26, 500);
+    
+INSERT INTO BOOKS(ID_BOOKS, DOCUMENT_ID, NB_PAGES)
     VALUES (0, 8, 15);
     
 INSERT INTO BOOKSID_BOOKS, DOCUMENT_ID, NB_PAGES)
@@ -706,6 +709,8 @@ INSERT INTO BOOKSID_BOOKS, DOCUMENT_ID, NB_PAGES)
 INSERT INTO BOOKS(ID_BOOKS, DOCUMENT_ID, NB_PAGES)
     VALUES (0, 10, 220);
 
+INSERT INTO BOOKS(ID_BOOKS, DOCUMENT_ID, NB_PAGES)
+    VALUES (0, 27, 220);
 -- CD
 
 INSERT INTO CD(ID_CD, DOCUMENT_ID, DURATION_CD, NB_SUBTITLES)
