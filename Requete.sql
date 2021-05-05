@@ -23,10 +23,13 @@ WHERE  D.id_documents IN (
 );
 
 -- 3 --
-SELECT documents.title, authors.surname_authors 
-FROM DOCUMENTS, AUTHORS, BORROWS, BORROWERS
-WHERE borrows.documents = documents.id_documents
-AND borrowers.id_borrower = borrows.borrower;
+SELECT br.id_borrower, D.title, A.surname_authors 
+FROM DOCUMENTS D, AUTHORS A, WROTE W, BORROWS BO, BORROWERS BR, EXEMPLAR E
+WHERE A.id_authors = W.author
+AND W.documents = D.id_documents
+AND D.id_documents = E.documents
+AND E.id_exemplar = BO.exemplar
+AND BO.borrower = BR.id_borrower;
 
 -- 4 --
 
@@ -43,9 +46,9 @@ FROM DOCUMENTS
 group by editor;
 
 -- 7 --
-SELECT documents.id_documents, documents.title, COUNT (borrows.documents) as nb_emprunt
-FROM DOCUMENTS LEFT JOIN BORROWS ON documents.id_documents = borrows.documents
-GROUP BY documents.id_documents, documents.title;
+SELECT D.id_documents, D.title, COUNT (E.documents) as nb_emprunt
+FROM DOCUMENTS D LEFT JOIN EXEMPLAR E ON D.id_documents = E.documents
+GROUP BY D.id_documents, D.title;
 
 -- 8 --
 SELECT editor
