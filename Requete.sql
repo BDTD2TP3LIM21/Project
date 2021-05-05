@@ -8,16 +8,25 @@ ORDER BY title;
 
 -- 2 --
 SELECT D.TITLE, D.THEME
-FROM DOCUMENTS D, BORROWERS BE, BORROWS BS
-WHERE BS.documents = D.id_documents
-AND BE.id_borrower = BS.borrower
-AND BS.begin_borrow > '15/11/2018'
-AND BS.end_borrow < '15/11/2019';
+FROM DOCUMENTS D
+WHERE  D.id_documents IN (
+    SELECT E.documents
+    FROM EXEMPLAR E
+    WHERE E.id_exemplar IN (
+        SELECT BS.exemplar
+        FROM BORROWERS BE, BORROWS BS
+        WHERE BE.id_borrower = BS.borrower
+        AND BS.begin_borrow > to_date('15/11/2018','DD-MM-YYYY')
+        AND BS.end_borrow < to_date('15/11/2019','DD-MM-YYYY')
+        AND BE.name_borrower = 'Dupont'
+    )
+);
 
 -- 3 --
 SELECT documents.title, authors.surname_authors 
 FROM DOCUMENTS, AUTHORS, BORROWS, BORROWERS
-WHERE borrows.documents = documents.id_documents AND borrowers.id_borrower = borrows.borrower;
+WHERE borrows.documents = documents.id_documents
+AND borrowers.id_borrower = borrows.borrower;
 
 -- 4 --
 
