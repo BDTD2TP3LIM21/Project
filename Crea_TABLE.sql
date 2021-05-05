@@ -489,6 +489,9 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
+	
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
+    VALUES (27, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 155, 'Edition de Fallois');
@@ -498,6 +501,9 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 154, 'Poney Gris');
+	
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
+    VALUES (26, 'Analyse du son au travers des maths', 'Mathématiques', 154, 'Poney Gris');
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (11, 'With light and with love', 'Musique Rock', 253, 'Differ Ant');
