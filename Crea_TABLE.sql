@@ -1,12 +1,12 @@
 -- =-=-=-=-=-=-=-=-=-=-=-= Partie 2. Création de la base de données multimédia =-=-=-=-=-=-=-=-=-=-=-= --
 
-DROP TABLE Autors CASCADE CONSTRAINTS;
-CREATE TABLE Autors (
-  Id_autors INT, 
-  Name_autors VARCHAR2(100), 
-  Surname_autors VARCHAR2(100), 
+DROP TABLE Authors CASCADE CONSTRAINTS;
+CREATE TABLE Authors (
+  Id_authors INT, 
+  Name_authors VARCHAR2(100), 
+  Surname_authors VARCHAR2(100), 
   Birthday DATE,
-  CONSTRAINT PK_Autors PRIMARY KEY (Id_autors));
+  CONSTRAINT PK_Authors PRIMARY KEY (Id_authors));
   
 DROP TABLE Key_words CASCADE CONSTRAINTS;
 CREATE TABLE Key_words (
@@ -124,14 +124,14 @@ CREATE TABLE Videos (
 -- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vérification de la cohérence de la base =-=-=-=-=-=-=-=-=-=-=-=-=-= --
 
 -- =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=- Triggers =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-= --
-DROP SEQUENCE id_autor;
-CREATE SEQUENCE id_autor;
+DROP SEQUENCE id_author;
+CREATE SEQUENCE id_author;
 
-create or replace trigger trig_autors_id
-before insert or update on autors
+create or replace trigger trig_authors_id
+before insert or update on authors
 for each row
 begin
-select id_autor.NEXTVAL INTO :new.id_autors FROM DUAL;
+select id_author.NEXTVAL INTO :new.id_authors FROM DUAL;
 END;
 /
 
@@ -201,8 +201,8 @@ select id_video.NEXTVAL INTO :new.id_videos FROM DUAL;
 END;
 /
 
-create or replace trigger trig_autors_birthday
-before insert or update on autors
+create or replace trigger trig_authors_birthday
+before insert or update on authors
 for each row
 begin
 if ((sysdate - :new.birthday)/365.25) < 0 then
