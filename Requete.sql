@@ -16,8 +16,8 @@ AND BS.begin_borrow > '15/11/2018'
 AND BS.end_borrow < '15/11/2019';
 
 -- 3 --
-SELECT documents.title, autors.surname_autors 
-FROM DOCUMENTS, AUTORS, BORROWS, BORROWERS
+SELECT documents.title, authors.surname_authors 
+FROM DOCUMENTS, AUTHORS, BORROWS, BORROWERS
 WHERE borrows.documents = documents.id_documents AND borrowers.id_borrower = borrows.borrower;
 
 -- 4 --
@@ -86,10 +86,20 @@ WHERE D1.id_documents NOT IN (
     );
     
 /*13-*/
-/*pasfini */
-SELECT B2.name_borrower, B2.surname_borrower
-FROM BORROWERS B2
-WHERE B2.name_categorie = 'Professionnel';
+SELECT B1.name_borrower, B1.surname_borrower
+FROM BORROWERS B1
+WHERE B1.name_categorie = 'Professionnel'
+AND B1.id_borrower IN (
+    SELECT BO.borrower
+    FROM DOCUMENTS DO1, BORROWS BO   
+    WHERE bo.end_borrow >= trunc(SYSDATE)
+    AND bo.end_borrow >= trunc(SYSDATE - 182.5)
+    AND DO1.id_documents IN(
+        SELECT DO2.id_documents
+        FROM DOCUMENTS DO2, DVD D 
+        WHERE DO2.id_documents = D.documents
+     )
+);
 
 /*14-*/
 
