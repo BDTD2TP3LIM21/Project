@@ -86,6 +86,7 @@ WHERE D1.id_documents NOT IN (
     );
     
 /*13-*/
+/*pasfini */
 SELECT B2.name_borrower, B2.surname_borrower
 FROM BORROWERS B2
 WHERE B2.name_categorie = 'Professionnel';
