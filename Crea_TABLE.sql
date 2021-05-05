@@ -80,36 +80,36 @@ CREATE TABLE Borrows (
   
 DROP TABLE Books CASCADE CONSTRAINTS;
 CREATE TABLE Books (
+  Document_Id INT,
   Id_books INT, 
   Nb_pages INT,
-  Document_Id INT,
-  CONSTRAINT PK_Books PRIMARY KEY (Id_books),
+  CONSTRAINT PK_Books PRIMARY KEY (Document_Id, Id_books),
   CONSTRAINT FK_Books_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
 
 DROP TABLE DVD CASCADE CONSTRAINTS;
 CREATE TABLE DVD (
+  Document_Id INT,
   Id_DVD INT, 
   Duration_DVD NUMBER(10,2),
-  Document_Id INT,
-  CONSTRAINT PK_DVD PRIMARY KEY (Id_DVD),
+  CONSTRAINT PK_DVD PRIMARY KEY (Document_Id, Id_DVD),
   CONSTRAINT FK_DVD_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
   
 DROP TABLE CD CASCADE CONSTRAINTS;
 CREATE TABLE CD (
+  Document_Id INT,
   Id_CD INT, 
   Duration_CD NUMBER(10,2),
   Nb_subtitles INT,
-  Document_Id INT,
-  CONSTRAINT PK_CD PRIMARY KEY (Id_CD),
+  CONSTRAINT PK_CD PRIMARY KEY (Document_Id, Id_CD),
   CONSTRAINT FK_CD_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
   
 DROP TABLE Videos CASCADE CONSTRAINTS;
 CREATE TABLE Videos (
+  Document_Id INT,
   Id_Videos INT, 
   Duration_Videos NUMBER(10,2),
   Extension VARCHAR2(5),
-  Document_Id INT,
-  CONSTRAINT PK_Videos PRIMARY KEY (Id_videos),
+  CONSTRAINT PK_Videos PRIMARY KEY (Document_Id, Id_videos),
   CONSTRAINT FK_Videos_Documents FOREIGN KEY(Document_Id) REFERENCES Documents(Id_Documents));
 
   
@@ -487,7 +487,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (6, 'JAVA pour les nuls', 'Informatique débutant', 153, 'Hachette');
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (7, 'Ocaml++ pour les nuls', 'Informatique débutant', 154, 'Hachette');
+    VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (8, 'Théorie de la géométrie iréel', 'Mathématique', 155, 'Edition de Fallois');
