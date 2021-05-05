@@ -67,7 +67,7 @@ CREATE TABLE Wrote (
   Author INT,
   CONSTRAINT PK_Wrote PRIMARY KEY (Documents, Author),
   CONSTRAINT FK_Wrote_Documents FOREIGN KEY (Documents) REFERENCES Documents(Id_documents),
-  CONSTRAINT FK_Wrote_Authors FOREIGN KEY (Author) REFERENCES AUTHORS(Id_AUTHORS));
+  CONSTRAINT FK_Wrote_Authors FOREIGN KEY (Author) REFERENCES Authors(Id_authors));
   
 DROP TABLE Borrows CASCADE CONSTRAINTS;
 CREATE TABLE Borrows (
