@@ -532,7 +532,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (2, 'LA VERITE DES BALTIMORE', 'ROMAN', 'Edition de Fallois', 1);
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 'Eyrolles', 1);
+    VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 'Eyrolles', 4);
    
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (4, 'SOLO LEVELING', 'Manga', 'DNC media', 1);
@@ -541,19 +541,19 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (5, 'TRAITE DE PEDAGOGIE', 'Philosophie', 'Hachette', 1);
              
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (6, 'JAVA pour les nuls', 'Informatique débutant', 'Hachette', 1);
+    VALUES (6, 'JAVA pour les nuls', 'Informatique débutant', 'Hachette', 2);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 'Hachette', 1);
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 'Edition de Fallois', 1);
+    VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 'Edition de Fallois', 2);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'Edition de Fallois', 1);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 'Poney Gris', 1);
+    VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 'Poney Gris', 3);
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (11, 'With light and with love', 'Musique Rock', 'Differ Ant', 1);
@@ -568,7 +568,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (14, 'Katy Perry Teenage Dream', 'Musique Pop', 'Virgin Records', 1);
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (15, 'Je suis suisse', 'Musique Bizarre', 'Poney Gris', 1);
+    VALUES (15, 'Je suis suisse', 'Musique Bizarre', 'Poney Gris', 12);
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (16, '52 - Bref. Je suis en couple', 'Comédie', 'CANAL+ France', 1);

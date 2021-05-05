@@ -102,4 +102,10 @@ AND B1.id_borrower IN (
 );
 
 /*14-*/
-
+SELECT DO1.title, DO1.quantity
+FROM DOCUMENTS  DO1
+WHERE DO1.quantity > (
+    SELECT avg(DO2.quantity)
+    FROM DOCUMENTS DO2
+)
+ORDER BY DO1.quantity DESC;
