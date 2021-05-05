@@ -309,7 +309,7 @@ INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('DUNOD', '11 Rue Paul Bert, 92247 Malakoff' ,  '01 41 23 66 00');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
-    VALUES ('EYROLLES', '55-57-61 Boulevard Saint-Germain, 75005 Paris' ,  '03 21 79 56 75');
+    VALUES ('Eyrolles', '55-57-61 Boulevard Saint-Germain, 75005 Paris' ,  '03 21 79 56 75');
 
 INSERT INTO EDITORS(NAME_EDITORS , ADRESSE , PHONE_NUMBER)
     VALUES ('DNC media', '93-2 Myeong Dong SEOUL' ,  '02 333 2514');
@@ -475,7 +475,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (2, 'LA VERITE DES BALTIMORE', 'ROMAN', 154, 'Edition de Fallois');
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 155, 'EYROLLES');
+    VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 155, 'Eyrolles');
    
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (4, 'SOLO LEVELING', 'Manga', 152, 'DNC media');
@@ -490,13 +490,13 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 154, 'Hachette');
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (8, 'Théorie de la géométrie iréel', 'Mathématique', 155, 'Edition de Fallois');
+    VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 155, 'Edition de Fallois');
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 153, 'Edition de Fallois');
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
-    VALUES (10, 'Analyse du son au travers des maths', 'Mathématique', 154, 'Poney Gris');
+    VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 154, 'Poney Gris');
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, SHELF, EDITOR)
     VALUES (11, 'With light and with love', 'Musique Rock', 253, 'Differ Ant');
