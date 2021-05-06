@@ -151,3 +151,18 @@ AND A.id_authors IN (
         WHERE D.theme LIKE '%Informatique%'
     )
 );
+
+-- 17 --
+SELECT D1.id_documents, COUNT (K.name_key_words) AS nb_keyword
+FROM Documents D1, Described D, Key_Words K
+WHERE D1.id_documents = D.documents
+AND D.key_word = K.name_key_words
+AND D1.id_documents IN (
+    SELECT D2.id_documents
+    FROM Documents D2
+    WHERE D2.id_documents = D.documents
+    AND D.key_word = K.name_key_words
+    GROUP BY D1.id_documents
+    HAVING COUNT (K.name_key_words) > 1 );
+    
+ -- 18 --
