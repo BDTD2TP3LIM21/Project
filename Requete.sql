@@ -33,6 +33,12 @@ AND BO.borrower = BR.id_borrower
 ORDER BY BR.id_borrower;
 
 -- 4 --
+SELECT A.name_authors
+FROM AUTHORS A, WROTE W, DOCUMENTS D, EDITORS E
+WHERE A.id_authors = W.author
+AND W.documents = D.id_documents
+AND D.editor = E.name_editors
+AND E.name_editors = 'DUNOD';
 
 -- 5 --
 SELECT editor, sum(quantity) as nb_Examplar
