@@ -67,13 +67,14 @@ GROUP BY editor
 HAVING COUNT(editor) > 1;
 
 -- 9 --
-SELECT borrowers.name_borrower
-FROM BORROWERS
-WHERE borrowers.adresse IN (
-    SELECT borrowers.name_borrower
-    FROM BORROWERS
-    WHERE borrowers.name_borrower = 'Dupont'
-    );
+SELECT B1.name_borrower
+FROM BORROWERS B1
+WHERE B1.adresse IN (
+    SELECT B2.adresse
+    FROM BORROWERS B2
+    WHERE B2.name_borrower = 'Dupont'
+    )
+AND B1.name_borrower != 'Dupont';
 
 -- 10 --
 SELECT D1.editor
@@ -94,30 +95,32 @@ WHERE B1.name_borrower NOT IN (
     WHERE B2.id_borrower = BO.borrower
 );
 
-
-
 -- 12 --
-SELECT D1.title as never_been_borrowed
-FROM DOCUMENTS D1
-WHERE D1.id_documents NOT IN (
-    SELECT D2.id_documents  
-    FROM DOCUMENTS D2, BORROWS B
-    WHERE D2.id_documents = B.documents
-    );
+SELECT D.title as never_been_borrowed
+FROM DOCUMENTS D
+WHERE D.id_documents NOT IN (
+    SELECT E.documents  
+    FROM EXEMPLAR E, BORROWS B
+    WHERE E.id_exemplar = B.exemplar
+);
     
 -- 13 -- 
-SELECT B1.name_borrower, B1.surname_borrower
-FROM BORROWERS B1
-WHERE B1.name_categorie = 'Professionnel'
-AND B1.id_borrower IN (
+SELECT B.name_borrower, B.surname_borrower
+FROM BORROWERS B
+WHERE B.name_categorie = 'Professionnel'
+AND B.id_borrower IN (
     SELECT BO.borrower
-    FROM DOCUMENTS DO1, BORROWS BO   
-    WHERE bo.end_borrow >= trunc(SYSDATE)
+    FROM BORROWS BO   
+    WHERE bo.end_borrow <= trunc(SYSDATE)
     AND bo.end_borrow >= trunc(SYSDATE - 182.5)
-    AND DO1.id_documents IN(
-        SELECT DO2.id_documents
-        FROM DOCUMENTS DO2, DVD D 
-        WHERE DO2.id_documents = D.documents
+    AND BO.exemplar IN (
+        SELECT E.id_exemplar
+        FROM EXEMPLAR E
+        WHERE E.documents IN (
+            SELECT DO2.id_documents
+            FROM DOCUMENTS DO2, DVD D 
+            WHERE DO2.id_documents = D.documents
+         )
      )
 );
 

@@ -397,7 +397,7 @@ INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHO
     VALUES (0, 'Gille', 'centzes', '231 boulevard de l`obellisque', '07 60 99 48 26', 'Professionnel');
 
 INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
-    VALUES (0, 'Marcel', 'Pontans', '77 rue du pont St Marc', '07 50 06 35 86', 'Public');
+    VALUES (0, 'Marcel', 'Pontans', '77 rue du pont St Marc', '07 50 06 35 86', 'Professionnel');
 
 INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
     VALUES (0, 'David', 'Newell', '789 avenue de l`hôtel Aurore', '04 12 68 29 48', 'Personnel');
@@ -548,7 +548,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (4, 'SOLO LEVELING', 'Manga', 'DNC media', 1);
   
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (5, 'TRAITE DE PEDAGOGIE', 'Philosophie', 'Hachette', 1);
+    VALUES (5, 'TRAITE DE PEDAGOGIE', 'Philosophie', 'DUNOD', 1);
              
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (6, 'JAVA pour les nuls', 'Informatique débutant', 'Hachette', 2);
@@ -560,7 +560,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 'Edition de Fallois', 2);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'DUNOD', 1);
+    VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'Edition de Fallois', 1);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 'Poney Gris', 3);
