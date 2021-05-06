@@ -23,13 +23,14 @@ WHERE  D.id_documents IN (
 );
 
 -- 3 --
-SELECT br.id_borrower, D.title, A.surname_authors 
+SELECT BR.id_borrower, BR.name_borrower, BR.surname_borrower, D.title, A.surname_authors 
 FROM DOCUMENTS D, AUTHORS A, WROTE W, BORROWS BO, BORROWERS BR, EXEMPLAR E
 WHERE A.id_authors = W.author
 AND W.documents = D.id_documents
 AND D.id_documents = E.documents
 AND E.id_exemplar = BO.exemplar
-AND BO.borrower = BR.id_borrower;
+AND BO.borrower = BR.id_borrower
+ORDER BY BR.id_borrower;
 
 -- 4 --
 
@@ -46,9 +47,11 @@ FROM DOCUMENTS
 group by editor;
 
 -- 7 --
-SELECT D.id_documents, D.title, COUNT (E.documents) as nb_emprunt
-FROM DOCUMENTS D LEFT JOIN EXEMPLAR E ON D.id_documents = E.documents
-GROUP BY D.id_documents, D.title;
+SELECT D.id_documents, D.title, COUNT (B.exemplar) as nb_emprunt
+FROM DOCUMENTS D, EXEMPLAR E LEFT JOIN BORROWS B ON E.id_exemplar = B.exemplar
+WHERE D.id_documents = E.documents
+GROUP BY D.id_documents, D.title
+ORDER BY D.id_documents;
 
 -- 8 --
 SELECT editor
@@ -66,7 +69,7 @@ WHERE borrowers.adresse IN (
     WHERE borrowers.name_borrower = 'Dupont'
     );
 
-/*10-*/
+-- 10 --
 SELECT D1.editor
 FROM DOCUMENTS D1
 WHERE D1.editor NOT IN (
@@ -87,7 +90,7 @@ WHERE B1.name_borrower NOT IN (
 
 
 
-/*12-*/
+-- 12 --
 SELECT D1.title as never_been_borrowed
 FROM DOCUMENTS D1
 WHERE D1.id_documents NOT IN (
@@ -96,7 +99,7 @@ WHERE D1.id_documents NOT IN (
     WHERE D2.id_documents = B.documents
     );
     
-/*13-*/
+-- 13 -- 
 SELECT B1.name_borrower, B1.surname_borrower
 FROM BORROWERS B1
 WHERE B1.name_categorie = 'Professionnel'
@@ -112,7 +115,7 @@ AND B1.id_borrower IN (
      )
 );
 
-/*14-*/
+-- 14 -- 
 SELECT DO1.title, DO1.quantity
 FROM DOCUMENTS  DO1
 WHERE DO1.quantity > (
@@ -121,7 +124,7 @@ WHERE DO1.quantity > (
 )
 ORDER BY DO1.quantity DESC;
 
-/*15-*/
+-- 15 --
 SELECT name_authors
 FROM AUTHORS A
 WHERE A.id_authors IN (
