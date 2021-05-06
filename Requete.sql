@@ -30,6 +30,7 @@ AND W.documents = D.id_documents
 AND D.id_documents = E.documents
 AND E.id_exemplar = BO.exemplar
 AND BO.borrower = BR.id_borrower
+GROUP BY BR.id_borrower, BR.name_borrower, BR.surname_borrower, D.title, A.surname_authors
 ORDER BY BR.id_borrower;
 
 -- 4 --
@@ -41,10 +42,10 @@ AND D.editor = E.name_editors
 AND E.name_editors = 'DUNOD';
 
 -- 5 --
-SELECT editor, sum(quantity) as nb_Examplar
-FROM DOCUMENTS D, EDITORS E
-WHERE D.editor = E.name_editors 
-AND E.name_editors = 'Eyrolles'
+SELECT editor, COUNT(*)
+FROM DOCUMENTS D, EXEMPLAR E
+WHERE D.id_documents = E.documents
+AND D.editor = 'Eyrolles'
 GROUP BY EDITOR;
 
 -- 6 --
@@ -125,13 +126,23 @@ AND B.id_borrower IN (
 );
 
 -- 14 -- 
-SELECT DO1.title, DO1.quantity
-FROM DOCUMENTS  DO1
-WHERE DO1.quantity > (
-    SELECT avg(DO2.quantity)
-    FROM DOCUMENTS DO2
-)
-ORDER BY DO1.quantity DESC;
+SELECT D1.title, quantityExemplar.nb_Exemplar_test
+FROM DOCUMENTS D1, ( 
+            SELECT D2.id_documents, COUNT(*) as nb_Exemplar_test
+            FROM DOCUMENTS D2, EXEMPLAR E2
+            WHERE D2.id_documents = E2.documents
+            GROUP BY D2.id_documents
+        ) quantityExemplar, (
+        SELECT AVG(nb_Exemplar) AS avg_Nb_Exemplar
+        FROM ( 
+            SELECT D3.id_documents, COUNT(*) as nb_Exemplar
+            FROM DOCUMENTS D3, EXEMPLAR E3
+            WHERE D3.id_documents = E3.documents
+            GROUP BY D3.id_documents
+            )
+        ) averageQuantity
+WHERE D1.id_documents = quantityexemplar.id_documents
+AND quantityexemplar.nb_Exemplar_test > averageQuantity.avg_Nb_Exemplar;
 
 -- 15 --
 SELECT name_authors
@@ -155,6 +166,26 @@ AND A.id_authors IN (
     )
 );
 
+-- 16 --
+SELECT quantityBorrow.editor, quantityBorrow.nb_Borrow
+FROM  ( 
+            SELECT D.editor, COUNT(*) as nb_Borrow
+            FROM DOCUMENTS D, EXEMPLAR E2, BORROWS BO
+            WHERE D.id_documents = E2.documents
+            AND E2.id_exemplar = BO.exemplar
+            GROUP BY D.editor
+        ) quantityBorrow, (
+        SELECT MAX(nb_Borrow) as max_nb_Borrow
+        FROM  ( 
+            SELECT D.editor, COUNT(*) as nb_Borrow
+            FROM DOCUMENTS D, EXEMPLAR E2, BORROWS BO
+            WHERE D.id_documents = E2.documents
+            AND E2.id_exemplar = BO.exemplar
+            GROUP BY D.editor
+            )
+        ) quantityMaxBorrow
+WHERE quantityBorrow.nb_Borrow = quantityMaxBorrow.max_nb_Borrow;
+
 -- 17 --
 SELECT D1.id_documents, COUNT (K.name_key_words) AS nb_keyword
 FROM Documents D1, Described D, Key_Words K
@@ -166,6 +197,7 @@ AND D1.id_documents IN (
     WHERE D2.id_documents = D.documents
     AND D.key_word = K.name_key_words
     GROUP BY D1.id_documents
-    HAVING COUNT (K.name_key_words) > 1 );
+    HAVING COUNT (K.name_key_words) > 1 
+);
     
  -- 18 --
