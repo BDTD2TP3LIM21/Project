@@ -186,20 +186,13 @@ FROM  (
         ) quantityMaxBorrow
 WHERE quantityBorrow.nb_Borrow = quantityMaxBorrow.max_nb_Borrow;
 
--- 17 --
-SELECT D1.id_documents, COUNT (K.name_key_words) AS nb_keyword
-FROM Documents D1, Described D, Key_Words K
-WHERE D1.id_documents = D.documents
-AND D.key_word = K.name_key_words
-AND D1.id_documents IN (
-    SELECT D2.id_documents
-    FROM Documents D2
-    WHERE D2.id_documents = D.documents
-    AND D.key_word = K.name_key_words
-    GROUP BY D1.id_documents
-    HAVING COUNT (K.name_key_words) > 1 
-);
+----------------------------------17/18/19/20-----------------------------
+-- JAVA pour les nuls = exactement les mêmes mot clé : algorithmique, programation
+-- Analyse du son au travers des maths = un mot clé en commun : algorithmique
+-- Théorie de la géométrie iréel = un mot clé en commun : algorithmique
+-- Théorie du réseaux quantiques = un mot clé en plus : algorithmique, programation et quantique
 
+-- 17 --
 SELECT DO1.title
 FROM DOCUMENTS DO1
 WHERE DO1.id_documents NOT IN (
@@ -214,26 +207,6 @@ WHERE DO1.id_documents NOT IN (
     )
     GROUP BY DO2.id_documents
 );
-
-SELECT DE2.key_word  
-FROM DOCUMENTS DO2, DESCRIBED DE2
-WHERE DO2.id_documents = DE2.documents
-AND DO2.title = 'JAVA pour les nuls';
-
-SELECT DE2.key_word  
-FROM DOCUMENTS DO2, DESCRIBED DE2
-WHERE DO2.id_documents = DE2.documents
-AND DO2.title = 'Analyse du son au travers des maths';
-
-SELECT DE2.key_word  
-FROM DOCUMENTS DO2, DESCRIBED DE2
-WHERE DO2.id_documents = DE2.documents
-AND DO2.title = 'Théorie de la géométrie iréel';
-
-SELECT DE2.key_word  
-FROM DOCUMENTS DO2, DESCRIBED DE2
-WHERE DO2.id_documents = DE2.documents
-AND DO2.title = 'Théorie du réseaux quantiques';
     
  -- 18 --
 SELECT DO1.title
@@ -248,3 +221,17 @@ AND DE1.key_word IN (
 GROUP BY DO1.title;
 
  -- 19 --
+ /*
+SELECT D1.id_documents, COUNT (K.name_key_words) AS nb_keyword
+FROM Documents D1, Described D, Key_Words K
+WHERE D1.id_documents = D.documents
+AND D.key_word = K.name_key_words
+AND D1.id_documents IN (
+    SELECT D2.id_documents
+    FROM Documents D2
+    WHERE D2.id_documents = D.documents
+    AND D.key_word = K.name_key_words
+    GROUP BY D1.id_documents
+    HAVING COUNT (K.name_key_words) > 1 
+);
+*/
