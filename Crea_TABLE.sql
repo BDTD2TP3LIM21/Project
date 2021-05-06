@@ -539,7 +539,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (1, 'LE TIGRE', 'Nouvelle', 'Edition de Fallois', 1);
     
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (2, 'LA VERITE DES BALTIMORE', 'ROMAN', 'Edition de Fallois', 1);
+    VALUES (2, 'LA VERITE DES BALTIMORE', 'ROMAN', 'DUNOD', 1);
  
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 'Eyrolles', 4);
@@ -560,7 +560,7 @@ INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 'Edition de Fallois', 2);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'Edition de Fallois', 1);
+    VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'DUNOD', 1);
 
 INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
     VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 'Poney Gris', 3);
