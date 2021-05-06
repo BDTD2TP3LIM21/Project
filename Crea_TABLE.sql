@@ -48,7 +48,6 @@ CREATE TABLE Documents (
   Title VARCHAR2(255),
   Theme VARCHAR2(255),
   Editor VARCHAR2(255),
-  Quantity INT,
   CONSTRAINT PK_Documents PRIMARY KEY (Id_documents),
   CONSTRAINT FK_Documents_Editor FOREIGN KEY(Editor) REFERENCES Editors(Name_Editors));
   
@@ -535,80 +534,80 @@ INSERT INTO Key_WORDS(NAME_KEY_WORDS)
     
 -- Documents
 
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (1, 'LE TIGRE', 'Nouvelle', 'Edition de Fallois', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (1, 'LE TIGRE', 'Nouvelle', 'Edition de Fallois');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (2, 'LA VERITE DES BALTIMORE', 'ROMAN', 'DUNOD', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (2, 'LA VERITE DES BALTIMORE', 'ROMAN', 'DUNOD');
  
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 'Eyrolles', 4);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (3, 'PHOTOGRAPHIER LE CIEL NOCTURNE', 'DOCUMENTAIRE', 'Eyrolles');
    
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (4, 'SOLO LEVELING', 'Manga', 'DNC media', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (4, 'SOLO LEVELING', 'Manga', 'DNC media');
   
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (5, 'TRAITE DE PEDAGOGIE', 'Philosophie', 'DUNOD', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (5, 'TRAITE DE PEDAGOGIE', 'Philosophie', 'DUNOD');
              
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (6, 'JAVA pour les nuls', 'Informatique débutant', 'Hachette', 2);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (6, 'JAVA pour les nuls', 'Informatique débutant', 'Hachette');
 
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 'Hachette', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (7, 'SQL pour les nuls', 'Informatique débutant', 'Hachette');
  
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 'Edition de Fallois', 2);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (8, 'Théorie de la géométrie iréel', 'Mathématiques', 'Edition de Fallois');
 
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'Edition de Fallois', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (9, 'Théorie du réseaux quantiques', 'Informatique', 'Edition de Fallois');
 
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 'Poney Gris', 3);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (10, 'Analyse du son au travers des maths', 'Mathématiques', 'Poney Gris');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (11, 'With light and with love', 'Musique Rock', 'Differ Ant', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (11, 'With light and with love', 'Musique Rock', 'Differ Ant');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (12, 'L`impalpable', 'Musique Electro', 'Differ Ant', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (12, 'L`impalpable', 'Musique Electro', 'Differ Ant');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (13, 'Expérience', 'Musique Electro', 'Poney Gris', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (13, 'Expérience', 'Musique Electro', 'Poney Gris');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (14, 'Katy Perry Teenage Dream', 'Musique Pop', 'Virgin Records', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (14, 'Katy Perry Teenage Dream', 'Musique Pop', 'Virgin Records');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (15, 'Je suis suisse', 'Musique Bizarre', 'Poney Gris', 3);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (15, 'Je suis suisse', 'Musique Bizarre', 'Poney Gris');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (16, '52 - Bref. Je suis en couple', 'Comédie', 'CANAL+ France', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (16, '52 - Bref. Je suis en couple', 'Comédie', 'CANAL+ France');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (17, 'LES RÉUNIONS 5', 'Comédie', 'Youtube', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (17, 'LES RÉUNIONS 5', 'Comédie', 'Youtube');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (18, 'Les nouveaux capitaliste', 'Documentaire', 'Poney Gris', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (18, 'Les nouveaux capitaliste', 'Documentaire', 'Poney Gris');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (19, 'Le couscous au japon', 'Comédie', 'Tev and Louis', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (19, 'Le couscous au japon', 'Comédie', 'Tev and Louis');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (20, 'Tu n`es pas le centre du monde', 'Éducatif', 'Vortex', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (20, 'Tu n`es pas le centre du monde', 'Éducatif', 'Vortex');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (21, 'LE SILENCE DE LA MER', 'Biographie', 'Expand Drama', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (21, 'LE SILENCE DE LA MER', 'Biographie', 'Expand Drama');
 
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (22, 'CLARA ET MOI','Commentaire audio', 'Gloria films', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (22, 'CLARA ET MOI','Commentaire audio', 'Gloria films');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (23, 'SIA, LE RÊVE DU PYTHON' ,'Histoire afrique', 'Les productions de la Lanterne', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (23, 'SIA, LE RÊVE DU PYTHON' ,'Histoire afrique', 'Les productions de la Lanterne');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (24, 'IL ÉTAIT UNE FOIS UN FLIC' ,'Film Policier' , 'Gaumont', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (24, 'IL ÉTAIT UNE FOIS UN FLIC' ,'Film Policier' , 'Gaumont');
     
-INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR, QUANTITY)
-    VALUES (25, 'PETER PAN' , 'Fiction Fantastique', 'Columbia pictures', 1);
+INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+    VALUES (25, 'PETER PAN' , 'Fiction Fantastique', 'Columbia pictures');
 
 -- Described
 
