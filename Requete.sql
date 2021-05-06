@@ -199,5 +199,52 @@ AND D1.id_documents IN (
     GROUP BY D1.id_documents
     HAVING COUNT (K.name_key_words) > 1 
 );
+
+SELECT DO1.title
+FROM DOCUMENTS DO1
+WHERE DO1.id_documents NOT IN (
+    SELECT DO2.id_documents
+    FROM DOCUMENTS DO2, DESCRIBED DE1
+    WHERE DO2.id_documents = DE1.documents
+    AND DE1.key_word IN (
+        SELECT DE2.key_word  
+        FROM DOCUMENTS DO3, DESCRIBED DE2
+        WHERE DO3.id_documents = DE2.documents
+        AND DO3.title = 'SQL pour les nuls'
+    )
+    GROUP BY DO2.id_documents
+);
+
+SELECT DE2.key_word  
+FROM DOCUMENTS DO2, DESCRIBED DE2
+WHERE DO2.id_documents = DE2.documents
+AND DO2.title = 'JAVA pour les nuls';
+
+SELECT DE2.key_word  
+FROM DOCUMENTS DO2, DESCRIBED DE2
+WHERE DO2.id_documents = DE2.documents
+AND DO2.title = 'Analyse du son au travers des maths';
+
+SELECT DE2.key_word  
+FROM DOCUMENTS DO2, DESCRIBED DE2
+WHERE DO2.id_documents = DE2.documents
+AND DO2.title = 'Théorie de la géométrie iréel';
+
+SELECT DE2.key_word  
+FROM DOCUMENTS DO2, DESCRIBED DE2
+WHERE DO2.id_documents = DE2.documents
+AND DO2.title = 'Théorie du réseaux quantiques';
     
  -- 18 --
+SELECT DO1.title
+FROM DOCUMENTS DO1, DESCRIBED DE1
+WHERE DO1.id_documents = DE1.documents
+AND DE1.key_word IN (
+    SELECT DE2.key_word  
+    FROM DOCUMENTS DO2, DESCRIBED DE2
+    WHERE DO2.id_documents = DE2.documents
+    AND DO2.title = 'SQL pour les nuls'
+)
+GROUP BY DO1.title;
+
+ -- 19 --
