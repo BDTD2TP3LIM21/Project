@@ -85,8 +85,8 @@ FROM BORROWERS B1
 WHERE B1.name_borrower NOT IN (
     SELECT B2.name_borrower
     FROM BORROWERS B2, BORROWS BO
-    WHERE B2.name_borrower = BO.borrower
-    );
+    WHERE B2.id_borrower = BO.borrower
+);
 
 
 
