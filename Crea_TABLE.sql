@@ -277,7 +277,7 @@ declare nb_max integer;
 BEGIN
 select COUNT(*) into cpt
 from borrows
-where borrower = :new.borrower;
+where borrower = :new.borrower and end_borrow > sysdate;
 
 select nb_doc_max into nb_max
 from categories, borrowers
