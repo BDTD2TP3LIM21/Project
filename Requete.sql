@@ -47,22 +47,22 @@ END;
 BEGIN
 LOCK TABLE BORROWERS IN EXCLUSIVE MODE;
 DECLARE BorrowersCOUNT number;
-BEGIN 
-savepoint AddBorrowers;
-INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
-    VALUES (0, 'Dupont', 'Dupont', '77 rue du pont St Marc', '06 52 95 62 45', 'Public');
-
-SELECT COUNT(*) into BorrowersCOUNT from BORROWERS WHERE name_borrower = 'Dupont' and surname_borrower = 'Dupont';
-if (BorrowersCOUNT > 1) then
-    BEGIN
-        ROLLBACK TO AddBorrowers;
+    BEGIN 
+    savepoint AddBorrowers;
+    INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
+        VALUES (0, 'Dupont', 'Dupont', '77 rue du pont St Marc', '06 52 95 62 45', 'Public');
+    
+    SELECT COUNT(*) into BorrowersCOUNT from BORROWERS WHERE name_borrower = 'Dupont' and surname_borrower = 'Dupont';
+    if (BorrowersCOUNT > 1) then
+        BEGIN
+            ROLLBACK TO AddBorrowers;
+        END;
+        else 
+        BEGIN
+            COMMIT;
+        END;
+    end if;
     END;
-    else 
-    BEGIN
-        COMMIT;
-    END;
-end if;   
-END;
 END;
 
 ------ Partie sur les requêtes -----
