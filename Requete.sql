@@ -1,12 +1,81 @@
+---- Partie sur les transactions ----
+
+-- Ajout manuel de données dans la base : 
+
+SET AUTOCOMMIT OFF;
+
+INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
+    VALUES (0, 'Charles', 'Jean', '84 rue du Moulin', '06 52 54 12 95', 'Public');
+    
+commit;
+
+INSERT INTO EXEMPLAR(ID_EXEMPLAR, SHELF, DOCUMENTS)
+    VALUES(0, 102, 3);
+commit;
+
+INSERT INTO BORROWS(BORROWER, EXEMPLAR, BEGIN_BORROW, END_BORROW)
+    VALUES(15, 29, '05/05/2021', '20/05/2021');
+    
+commit;
+
+SET AUTOCOMMIT ON;
+
+-- Transaction sur les documents : ne peuvent pas avoir le même nom (arbitraire)
+BEGIN
+    LOCK TABLE DOCUMENTS IN EXCLUSIVE MODE;
+    DECLARE DOCCOUNT number;
+    BEGIN 
+        savepoint AddDocuments;
+        INSERT INTO DOCUMENTS(ID_DOCUMENTS, TITLE, THEME, EDITOR)
+        VALUES (30, 'LE TIGRE', 'Nouvelle', 'Edition de Fallois');
+        
+        SELECT COUNT(*) into DOCCOUNT from DOCUMENTS WHERE title = 'LE TIGRE';
+        if (DOCCOUNT > 1) then
+            BEGIN
+                ROLLBACK TO AddDocuments;
+            END;
+            else 
+            BEGIN
+                COMMIT;
+            END;
+        end if;   
+    END;
+END;
+
+
+-- Transactions sur les emprunteurs, emprunteur ne peut pas avoir le même nom et prénom qu'un autre (arbitraire)
+BEGIN
+LOCK TABLE BORROWERS IN EXCLUSIVE MODE;
+DECLARE BorrowersCOUNT number;
+BEGIN 
+savepoint AddBorrowers;
+INSERT INTO BORROWERS(ID_BORROWER, NAME_BORROWER, SURNAME_BORROWER, ADRESSE, PHONE_NUMBER, NAME_CATEGORIE)
+    VALUES (0, 'Dupont', 'Dupont', '77 rue du pont St Marc', '06 52 95 62 45', 'Public');
+
+SELECT COUNT(*) into BorrowersCOUNT from BORROWERS WHERE name_borrower = 'Dupont' and surname_borrower = 'Dupont';
+if (BorrowersCOUNT > 1) then
+    BEGIN
+        ROLLBACK TO AddBorrowers;
+    END;
+    else 
+    BEGIN
+        COMMIT;
+    END;
+end if;   
+END;
+END;
+
 ------ Partie sur les requêtes -----
 
 -- 1 --
+CREATE OR REPLACE VIEW question_1 AS
 SELECT TITLE 
 FROM DOCUMENTS
 WHERE Theme LIKE '%Informatique%' OR Theme LIKE '%Mathématiques%'
 ORDER BY title;
 
 -- 2 --
+CREATE OR REPLACE VIEW question_2 AS
 SELECT D.TITLE, D.THEME
 FROM DOCUMENTS D
 WHERE  D.id_documents IN (
@@ -23,6 +92,8 @@ WHERE  D.id_documents IN (
 );
 
 -- 3 --
+
+CREATE OR REPLACE VIEW question_3 AS
 SELECT BR.id_borrower, BR.name_borrower, BR.surname_borrower, D.title, A.surname_authors 
 FROM DOCUMENTS D, AUTHORS A, WROTE W, BORROWS BO, BORROWERS BR, EXEMPLAR E
 WHERE A.id_authors = W.author
@@ -34,6 +105,7 @@ GROUP BY BR.id_borrower, BR.name_borrower, BR.surname_borrower, D.title, A.surna
 ORDER BY BR.id_borrower;
 
 -- 4 --
+CREATE OR REPLACE VIEW question_4 AS
 SELECT A.name_authors
 FROM AUTHORS A, WROTE W, DOCUMENTS D, EDITORS E
 WHERE A.id_authors = W.author
@@ -42,6 +114,7 @@ AND D.editor = E.name_editors
 AND E.name_editors = 'DUNOD';
 
 -- 5 --
+CREATE OR REPLACE VIEW question_5 AS
 SELECT editor, COUNT(*)
 FROM DOCUMENTS D, EXEMPLAR E
 WHERE D.id_documents = E.documents
@@ -49,11 +122,13 @@ AND D.editor = 'Eyrolles'
 GROUP BY EDITOR;
 
 -- 6 --
+CREATE OR REPLACE VIEW question_6 AS
 SELECT editor, COUNT(*) as nb_doc
 FROM DOCUMENTS 
 group by editor;
 
 -- 7 --
+CREATE OR REPLACE VIEW question_7 AS
 SELECT D.id_documents, D.title, COUNT (B.exemplar) as nb_emprunt
 FROM DOCUMENTS D, EXEMPLAR E LEFT JOIN BORROWS B ON E.id_exemplar = B.exemplar
 WHERE D.id_documents = E.documents
@@ -61,6 +136,7 @@ GROUP BY D.id_documents, D.title
 ORDER BY D.id_documents;
 
 -- 8 --
+CREATE OR REPLACE VIEW question_8 AS
 SELECT editor
 FROM DOCUMENTS 
 WHERE theme LIKE '%Informatique%' OR Theme LIKE '%Mathématiques%'
@@ -68,6 +144,7 @@ GROUP BY editor
 HAVING COUNT(editor) > 1;
 
 -- 9 --
+CREATE OR REPLACE VIEW question_9 AS
 SELECT B1.name_borrower
 FROM BORROWERS B1
 WHERE B1.adresse IN (
@@ -78,6 +155,7 @@ WHERE B1.adresse IN (
 AND B1.name_borrower != 'Dupont';
 
 -- 10 --
+CREATE OR REPLACE VIEW question_10 AS
 SELECT D1.editor
 FROM DOCUMENTS D1
 WHERE D1.editor NOT IN (
@@ -88,6 +166,7 @@ WHERE D1.editor NOT IN (
 GROUP BY editor;
 
 -- 11 --
+CREATE OR REPLACE VIEW question_11 AS
 SELECT B1.name_borrower as never_borrowed
 FROM BORROWERS B1
 WHERE B1.name_borrower NOT IN (
@@ -97,6 +176,7 @@ WHERE B1.name_borrower NOT IN (
 );
 
 -- 12 --
+CREATE OR REPLACE VIEW question_12 AS
 SELECT D.title as never_been_borrowed
 FROM DOCUMENTS D
 WHERE D.id_documents NOT IN (
@@ -106,6 +186,7 @@ WHERE D.id_documents NOT IN (
 );
     
 -- 13 -- 
+CREATE OR REPLACE VIEW question_13 AS
 SELECT B.name_borrower, B.surname_borrower
 FROM BORROWERS B
 WHERE B.name_categorie = 'Professionnel'
@@ -126,6 +207,7 @@ AND B.id_borrower IN (
 );
 
 -- 14 -- 
+CREATE OR REPLACE VIEW question_14 AS
 SELECT D1.title, quantityExemplar.nb_Exemplar_test
 FROM DOCUMENTS D1, ( 
             SELECT D2.id_documents, COUNT(*) as nb_Exemplar_test
@@ -145,6 +227,7 @@ WHERE D1.id_documents = quantityexemplar.id_documents
 AND quantityexemplar.nb_Exemplar_test > averageQuantity.avg_Nb_Exemplar;
 
 -- 15 --
+CREATE OR REPLACE VIEW question_15 AS
 SELECT name_authors
 FROM AUTHORS A
 WHERE A.id_authors IN (
@@ -167,6 +250,7 @@ AND A.id_authors IN (
 );
 
 -- 16 --
+CREATE OR REPLACE VIEW question_16 AS
 SELECT quantityBorrow.editor, quantityBorrow.nb_Borrow
 FROM  ( 
             SELECT D.editor, COUNT(*) as nb_Borrow
@@ -193,6 +277,7 @@ WHERE quantityBorrow.nb_Borrow = quantityMaxBorrow.max_nb_Borrow;
 -- Théorie du réseaux quantiques = un mot clé en plus : algorithmique, programation et quantique
 
 -- 17 --
+CREATE OR REPLACE VIEW question_17 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1
 WHERE DO1.id_documents NOT IN (
@@ -209,6 +294,7 @@ WHERE DO1.id_documents NOT IN (
 );
     
  -- 18 --
+CREATE OR REPLACE VIEW question_18 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1, DESCRIBED DE1
 WHERE DO1.id_documents = DE1.documents
@@ -221,6 +307,7 @@ AND DE1.key_word IN (
 GROUP BY DO1.title;
 
  -- 19 --
+CREATE OR REPLACE VIEW question_19 AS
  /*
 SELECT D1.id_documents, COUNT (K.name_key_words) AS nb_keyword
 FROM Documents D1, Described D, Key_Words K

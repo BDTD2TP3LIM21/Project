@@ -119,7 +119,27 @@ CREATE TABLE Videos (
   Extension VARCHAR2(5),
   CONSTRAINT PK_Videos PRIMARY KEY (Id_videos),
   CONSTRAINT FK_Videos_Documents FOREIGN KEY(Documents) REFERENCES Documents(Id_Documents));
-  
+ 
+ 
+ALTER TABLE Books
+ADD CONSTRAINT CK_Books_Pages CHECK (nb_pages > 0 );
+
+ALTER TABLE CD
+ADD CONSTRAINT CK_CD_Subtitles CHECK (nb_subtitles > 0 );
+
+ALTER TABLE DVD
+ADD CONSTRAINT CK_DVD_Duration CHECK (duration_dvd > 0 );
+
+ALTER TABLE CD
+ADD CONSTRAINT CK_CD_Duration CHECK (duration_cd > 0 );
+
+ALTER TABLE Videos
+ADD CONSTRAINT CK_Videos_Duration CHECK (duration_videos > 0 );
+
+ALTER TABLE Videos
+ADD CONSTRAINT CK_Videos_Extension CHECK (extension ='flv' OR extension ='avi' OR extension = 'mov' OR extension ='mp4' OR extension = 'wmv');
+
+
 -- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vérification de la cohérence de la base =-=-=-=-=-=-=-=-=-=-=-=-=-= --
 
 -- =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=- Triggers =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-= --
@@ -224,29 +244,103 @@ create or replace trigger trig_borrows_begin_end
 before insert or update on borrows
 for each row
 begin
-if (:new.end_borrow < :new.begin_borrow) then
+if (:new.begin_borrow > :new.end_borrow) then
 raise_application_error('-20001', 'Begin of borrows must be before the end');
 end if;
 end;
 /
 
-ALTER TABLE Books
-ADD CONSTRAINT CK_Books_Pages CHECK (nb_pages > 0 );
 
-ALTER TABLE CD
-ADD CONSTRAINT CK_CD_Subtitles CHECK (nb_subtitles > 0 );
+-- Vérifie que le documents n'est pas déjà emprunté
+create or replace trigger trig_borrows_available
+before insert or update on borrows
+for each row
+declare cpt number; 
+BEGIN
+select COUNT(exemplar) into cpt
+from borrows
+where exemplar = :new.exemplar and end_borrow > sysdate;
+if cpt > 0
+then
+    raise_application_error('-20001', 'The documents is arleady borrows');
+end if;
+end;
+/
 
-ALTER TABLE DVD
-ADD CONSTRAINT CK_DVD_Duration CHECK (duration_dvd > 0 );
+-- Vérifie que l'emprunteur n'a pas déjà la maximum de documents empruntés
+create or replace trigger trig_borrows_number
+before insert or update on borrows
+for each row
+declare cpt number;
+BEGIN
+declare nb_max integer;
+BEGIN
+select COUNT(*) into cpt
+from borrows
+where borrower = :new.borrower;
 
-ALTER TABLE CD
-ADD CONSTRAINT CK_CD_Duration CHECK (duration_cd > 0 );
+select nb_doc_max into nb_max
+from categories, borrowers
+where borrowers.id_borrower = :new.borrower and borrowers.name_categorie = categories.name_categories;
+if (cpt >= nb_max)
+then
+    raise_application_error('-20001', 'The limit of documents achieved');
+end if;
+end;
+end;
+/
 
-ALTER TABLE Videos
-ADD CONSTRAINT CK_Videos_Duration CHECK (duration_videos > 0 );
+-- Verifie que l'emprunt supprimé n'est pas en cours d'emprunt 
+create or replace trigger trig_borrows_delete_check
+before delete on borrows
+for each row
+declare cpt number; 
+BEGIN
+select COUNT(*) into cpt
+from borrows
+where exemplar = :old.exemplar and :old.end_borrow > sysdate;
+if cpt > 0
+then
+    raise_application_error('-20001', 'This borrows have to be end for delete');
+end if;
+end;
+/
 
-ALTER TABLE Videos
-ADD CONSTRAINT CK_Videos_Extension CHECK (extension ='flv' OR extension ='avi' OR extension = 'mov' OR extension ='mp4' OR extension = 'wmv');
+-- Verifie que l'emprunteur supprimé n'a pas d'emprunt en cours
+create or replace trigger trig_borrower_delete_check
+before delete on borrowers
+for each row
+declare cpt number; 
+BEGIN
+select COUNT(*) into cpt
+from borrows, borrowers
+where borrower = :old.id_borrower and end_borrow > sysdate;
+if cpt > 0
+then
+    raise_application_error('-20001', 'The borrower have some borrows in process');
+end if;
+end;
+/
+
+-- Verifie que l'exemplair supprimé n'est pas en cours d'emprunt
+create or replace trigger trig_exemplar_delete_check
+before delete on exemplar
+for each row
+declare cpt number; 
+BEGIN
+select COUNT(*) into cpt
+from borrows, exemplar
+where exemplar = :old.id_exemplar and end_borrow > sysdate;
+if cpt > 0
+then
+    raise_application_error('-20001', 'This exemplar is in process of borrowing');
+end if;
+end;
+/
+
+-- Vérifie que l'emprunteur n'est pas en retard sur un de ces doccuments
+-- Dans notre base actuelle nous ne pouvons pas connaître la nature d'un documents juste avec son id
+-- On ne peut donc pas savoir à quoi se réfère le nombre de semaine max d'un emprunt
 
 
 -- =-=-=-=-=-=-=-=-=-=-=-= Partie 5. Remplissage de la table =-=-=-=-=-=-=-=-=-=-=-= --
