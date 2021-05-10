@@ -338,7 +338,7 @@ AND DE1.key_word IN ( -- a au moins un mot clef qui est dans SQL pour les nuls -
     WHERE DO2.id_documents = DE2.documents
     AND DO2.title = 'SQL pour les nuls'
 )
-AND do1.id_documents NOT IN ( -- a un mot clef qui n est pas dans SQL pour les nuls --
+AND do1.id_documents NOT IN ( -- n a pas un mot clef qui n est pas dans SQL pour les nuls --
     SELECT DO3.id_documents
     FROM DOCUMENTS DO3, DESCRIBED DE3
     WHERE DO3.id_documents = DE3.documents
