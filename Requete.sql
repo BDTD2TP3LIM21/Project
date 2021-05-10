@@ -304,21 +304,57 @@ AND DE1.key_word IN (
     WHERE DO2.id_documents = DE2.documents
     AND DO2.title = 'SQL pour les nuls'
 )
+AND DO1.title != 'SQL pour les nuls'
 GROUP BY DO1.title;
 
  -- 19 --
 CREATE OR REPLACE VIEW question_19 AS
- /*
-SELECT D1.id_documents, COUNT (K.name_key_words) AS nb_keyword
-FROM Documents D1, Described D, Key_Words K
-WHERE D1.id_documents = D.documents
-AND D.key_word = K.name_key_words
-AND D1.id_documents IN (
-    SELECT D2.id_documents
-    FROM Documents D2
-    WHERE D2.id_documents = D.documents
-    AND D.key_word = K.name_key_words
-    GROUP BY D1.id_documents
-    HAVING COUNT (K.name_key_words) > 1 
+SELECT DO1.title
+FROM DOCUMENTS DO1, DESCRIBED DE1
+WHERE DO1.id_documents = DE1.documents
+AND DE1.key_word IN (
+    SELECT DE2.key_word  
+    FROM DOCUMENTS DO2, DESCRIBED DE2
+    WHERE DO2.id_documents = DE2.documents
+    AND DO2.title = 'SQL pour les nuls'
+)
+AND DO1.title != 'SQL pour les nuls'
+GROUP BY DO1.title
+HAVING COUNT(DE1.key_word) >= (
+    SELECT COUNT(DE5.key_word)
+    FROM DOCUMENTS DO5, DESCRIBED DE5
+    WHERE DO5.id_documents = DE5.documents
+    AND DO5.title = 'SQL pour les nuls'
 );
-*/
+
+ -- 20 --
+CREATE OR REPLACE VIEW question_20 AS
+SELECT DO1.title
+FROM DOCUMENTS DO1, DESCRIBED DE1
+WHERE DO1.id_documents = DE1.documents
+AND DE1.key_word IN (
+    SELECT DE2.key_word  
+    FROM DOCUMENTS DO2, DESCRIBED DE2
+    WHERE DO2.id_documents = DE2.documents
+    AND DO2.title = 'SQL pour les nuls'
+)
+AND do1.id_documents NOT IN (
+    SELECT DO3.id_documents
+    FROM DOCUMENTS DO3, DESCRIBED DE3
+    WHERE DO3.id_documents = DE3.documents
+    AND DE3.key_word NOT IN (
+        SELECT DE4.key_word  
+        FROM DOCUMENTS DO4, DESCRIBED DE4
+        WHERE DO4.id_documents = DE4.documents
+        AND DO4.title = 'SQL pour les nuls'
+    )
+    GROUP BY DO3.id_documents
+)
+AND DO1.title != 'SQL pour les nuls'
+GROUP BY DO1.title
+HAVING COUNT(DE1.key_word) = (
+    SELECT COUNT(DE5.key_word)
+    FROM DOCUMENTS DO5, DESCRIBED DE5
+    WHERE DO5.id_documents = DE5.documents
+    AND DO5.title = 'SQL pour les nuls'
+);
