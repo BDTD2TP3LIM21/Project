@@ -332,13 +332,13 @@ CREATE OR REPLACE VIEW question_20 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1, DESCRIBED DE1
 WHERE DO1.id_documents = DE1.documents
-AND DE1.key_word IN (
+AND DE1.key_word IN ( -- a au moins un mot clef qui est dans SQL pour les nuls --
     SELECT DE2.key_word  
     FROM DOCUMENTS DO2, DESCRIBED DE2
     WHERE DO2.id_documents = DE2.documents
     AND DO2.title = 'SQL pour les nuls'
 )
-AND do1.id_documents NOT IN (
+AND do1.id_documents NOT IN ( -- a un mot clef qui n est pas dans SQL pour les nuls --
     SELECT DO3.id_documents
     FROM DOCUMENTS DO3, DESCRIBED DE3
     WHERE DO3.id_documents = DE3.documents
@@ -350,9 +350,9 @@ AND do1.id_documents NOT IN (
     )
     GROUP BY DO3.id_documents
 )
-AND DO1.title != 'SQL pour les nuls'
+AND DO1.title != 'SQL pour les nuls' -- n'est pas SQL pour les nuls --
 GROUP BY DO1.title
-HAVING COUNT(DE1.key_word) = (
+HAVING COUNT(DE1.key_word) = ( --a un compte de mot = a SQL pour les nuls--
     SELECT COUNT(DE5.key_word)
     FROM DOCUMENTS DO5, DESCRIBED DE5
     WHERE DO5.id_documents = DE5.documents
