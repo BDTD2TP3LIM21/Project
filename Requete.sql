@@ -1,6 +1,11 @@
----- Partie sur les transactions ----
+-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= --
+-- Requete.sql -=-= COUGNON Alexandre, CRUCHON Joachim, FOURNIER Alexandre --
+-- =-=-=-=-=-=-=-=-=-=-=-=- L3 Informatique - TP3 -=-=-=-=-=-=-=-=-=-=-=-= --
+-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= --
 
--- Ajout manuel de données dans la base : 
+-- =-=-=- Partie 6 : Interrogation de la base de données multimédia -=-=-= --
+
+ -- Ajout manuel de données dans la base : 
 
 SET AUTOCOMMIT OFF;
 
@@ -20,7 +25,7 @@ commit;
 
 SET AUTOCOMMIT ON;
 
--- Transaction sur les documents : ne peuvent pas avoir le même nom (arbitraire)
+ -- Transaction sur les documents : ne peuvent pas avoir le même nom (arbitraire)
 BEGIN
     LOCK TABLE DOCUMENTS IN EXCLUSIVE MODE;
     DECLARE DOCCOUNT number;
@@ -43,7 +48,7 @@ BEGIN
 END;
 
 
--- Transactions sur les emprunteurs, emprunteur ne peut pas avoir le même nom et prénom qu'un autre (arbitraire)
+ -- Transactions sur les emprunteurs, emprunteur ne peut pas avoir le même nom et prénom qu'un autre (arbitraire)
 BEGIN
 LOCK TABLE BORROWERS IN EXCLUSIVE MODE;
 DECLARE BorrowersCOUNT number;
@@ -65,16 +70,16 @@ DECLARE BorrowersCOUNT number;
     END;
 END;
 
------- Partie sur les requêtes -----
+ ------ Partie sur les requêtes -----
 
--- 1 --
+  -- Requête 1 --
 CREATE OR REPLACE VIEW question_1 AS
 SELECT TITLE 
 FROM DOCUMENTS
 WHERE Theme LIKE '%Informatique%' OR Theme LIKE '%Mathématiques%'
 ORDER BY title;
 
--- 2 --
+  -- Requête 2 --
 CREATE OR REPLACE VIEW question_2 AS
 SELECT D.TITLE, D.THEME
 FROM DOCUMENTS D
@@ -91,7 +96,7 @@ WHERE  D.id_documents IN (
     )
 );
 
--- 3 --
+  -- Requête 3 --
 
 CREATE OR REPLACE VIEW question_3 AS
 SELECT BR.id_borrower, BR.name_borrower, BR.surname_borrower, D.title, A.surname_authors 
@@ -104,7 +109,7 @@ AND BO.borrower = BR.id_borrower
 GROUP BY BR.id_borrower, BR.name_borrower, BR.surname_borrower, D.title, A.surname_authors
 ORDER BY BR.id_borrower;
 
--- 4 --
+  -- Requête 4 --
 CREATE OR REPLACE VIEW question_4 AS
 SELECT A.name_authors
 FROM AUTHORS A, WROTE W, DOCUMENTS D, EDITORS E
@@ -113,7 +118,7 @@ AND W.documents = D.id_documents
 AND D.editor = E.name_editors
 AND E.name_editors = 'DUNOD';
 
--- 5 --
+  -- Requête 5 --
 CREATE OR REPLACE VIEW question_5 AS
 SELECT editor, COUNT(*)
 FROM DOCUMENTS D, EXEMPLAR E
@@ -121,13 +126,13 @@ WHERE D.id_documents = E.documents
 AND D.editor = 'Eyrolles'
 GROUP BY EDITOR;
 
--- 6 --
+  -- Requête 6 --
 CREATE OR REPLACE VIEW question_6 AS
 SELECT editor, COUNT(*) as nb_doc
 FROM DOCUMENTS 
 group by editor;
 
--- 7 --
+  -- Requête 7 --
 CREATE OR REPLACE VIEW question_7 AS
 SELECT D.id_documents, D.title, COUNT (B.exemplar) as nb_emprunt
 FROM DOCUMENTS D, EXEMPLAR E LEFT JOIN BORROWS B ON E.id_exemplar = B.exemplar
@@ -135,7 +140,7 @@ WHERE D.id_documents = E.documents
 GROUP BY D.id_documents, D.title
 ORDER BY D.id_documents;
 
--- 8 --
+  -- Requête 8 --
 CREATE OR REPLACE VIEW question_8 AS
 SELECT editor
 FROM DOCUMENTS 
@@ -143,7 +148,7 @@ WHERE theme LIKE '%Informatique%' OR Theme LIKE '%Mathématiques%'
 GROUP BY editor
 HAVING COUNT(editor) > 1;
 
--- 9 --
+  -- Requête 9 --
 CREATE OR REPLACE VIEW question_9 AS
 SELECT B1.name_borrower
 FROM BORROWERS B1
@@ -154,7 +159,7 @@ WHERE B1.adresse IN (
     )
 AND B1.name_borrower != 'Dupont';
 
--- 10 --
+  -- Requête 10 --
 CREATE OR REPLACE VIEW question_10 AS
 SELECT D1.editor
 FROM DOCUMENTS D1
@@ -165,7 +170,7 @@ WHERE D1.editor NOT IN (
     )
 GROUP BY editor;
 
--- 11 --
+  -- Requête 11 --
 CREATE OR REPLACE VIEW question_11 AS
 SELECT B1.name_borrower as never_borrowed
 FROM BORROWERS B1
@@ -175,7 +180,7 @@ WHERE B1.name_borrower NOT IN (
     WHERE B2.id_borrower = BO.borrower
 );
 
--- 12 --
+  -- Requête 12 --
 CREATE OR REPLACE VIEW question_12 AS
 SELECT D.title as never_been_borrowed
 FROM DOCUMENTS D
@@ -185,7 +190,7 @@ WHERE D.id_documents NOT IN (
     WHERE E.id_exemplar = B.exemplar
 );
     
--- 13 -- 
+  -- Requête 13 -- 
 CREATE OR REPLACE VIEW question_13 AS
 SELECT B.name_borrower, B.surname_borrower
 FROM BORROWERS B
@@ -206,7 +211,7 @@ AND B.id_borrower IN (
      )
 );
 
--- 14 -- 
+  -- Requête 14 -- 
 CREATE OR REPLACE VIEW question_14 AS
 SELECT D1.title, quantityExemplar.nb_Exemplar_test
 FROM DOCUMENTS D1, ( 
@@ -226,7 +231,7 @@ FROM DOCUMENTS D1, (
 WHERE D1.id_documents = quantityexemplar.id_documents
 AND quantityexemplar.nb_Exemplar_test > averageQuantity.avg_Nb_Exemplar;
 
--- 15 --
+  -- Requête 15 --
 CREATE OR REPLACE VIEW question_15 AS
 SELECT name_authors
 FROM AUTHORS A
@@ -249,7 +254,7 @@ AND A.id_authors IN (
     )
 );
 
--- 16 --
+  -- Requête 16 --
 CREATE OR REPLACE VIEW question_16 AS
 SELECT quantityBorrow.editor, quantityBorrow.nb_Borrow
 FROM  ( 
@@ -270,13 +275,13 @@ FROM  (
         ) quantityMaxBorrow
 WHERE quantityBorrow.nb_Borrow = quantityMaxBorrow.max_nb_Borrow;
 
-----------------------------------17/18/19/20-----------------------------
+  ------ Requêtes 17/18/19/20
 -- JAVA pour les nuls = exactement les mêmes mot clé : algorithmique, programation
 -- Analyse du son au travers des maths = un mot clé en commun : algorithmique
 -- Théorie de la géométrie iréel = un mot clé en commun : algorithmique
 -- Théorie du réseaux quantiques = un mot clé en plus : algorithmique, programation et quantique
 
--- 17 --
+  -- Requête 17 --
 CREATE OR REPLACE VIEW question_17 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1
@@ -293,7 +298,7 @@ WHERE DO1.id_documents NOT IN (
     GROUP BY DO2.id_documents
 );
     
- -- 18 --
+  -- Requête 18 --
 CREATE OR REPLACE VIEW question_18 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1, DESCRIBED DE1
@@ -307,7 +312,7 @@ AND DE1.key_word IN (
 AND DO1.title != 'SQL pour les nuls'
 GROUP BY DO1.title;
 
- -- 19 --
+  -- Requête 19 --
 CREATE OR REPLACE VIEW question_19 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1, DESCRIBED DE1
@@ -327,7 +332,7 @@ HAVING COUNT(DE1.key_word) >= (
     AND DO5.title = 'SQL pour les nuls'
 );
 
- -- 20 --
+  -- Requête 20 --
 CREATE OR REPLACE VIEW question_20 AS
 SELECT DO1.title
 FROM DOCUMENTS DO1, DESCRIBED DE1

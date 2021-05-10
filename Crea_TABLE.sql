@@ -1,4 +1,9 @@
--- =-=-=-=-=-=-=-=-=-=-=-= Partie 2. Création de la base de données multimédia =-=-=-=-=-=-=-=-=-=-=-= --
+-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= --
+-- Create_Table.sql COUGNON Alexandre, CRUCHON Joachim, FOURNIER Alexandre --
+-- =-=-=-=-=-=-=-=-=-=-=-=- L3 Informatique - TP3 -=-=-=-=-=-=-=-=-=-=-=-= --
+-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= --
+
+-- =-=-=-=-= Partie 2. Création de la base de données multimédia =-=-=-=-= --
 
 DROP TABLE Authors CASCADE CONSTRAINTS;
 CREATE TABLE Authors (
@@ -139,10 +144,9 @@ ADD CONSTRAINT CK_Videos_Duration CHECK (duration_videos > 0 );
 ALTER TABLE Videos
 ADD CONSTRAINT CK_Videos_Extension CHECK (extension ='flv' OR extension ='avi' OR extension = 'mov' OR extension ='mp4' OR extension = 'wmv');
 
+-- =-=-=-=-=- Partie 4. Vérification de la cohérence de la base -=-=-=-=-= --
 
--- =-=-=-=-=-=-=-=-=-=-=-= Partie 4. Vérification de la cohérence de la base =-=-=-=-=-=-=-=-=-=-=-=-=-= --
-
--- =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=- Triggers =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-= --
+    -- =-=-=-=-=-=-=-=-=-=-=-=-= Triggers =-=-=-=-=-=-=-=-=-=-=-=-= --
 DROP SEQUENCE id_author;
 CREATE SEQUENCE id_author;
 
@@ -342,8 +346,7 @@ end;
 -- Dans notre base actuelle nous ne pouvons pas connaître la nature d'un documents juste avec son id
 -- On ne peut donc pas savoir à quoi se réfère le nombre de semaine max d'un emprunt
 
-
--- =-=-=-=-=-=-=-=-=-=-=-= Partie 5. Remplissage de la table =-=-=-=-=-=-=-=-=-=-=-= --
+-- =-=-=-=-=-=-=-=-= Partie 5. Remplissage de la table =-=-=-=-=-=-=-=-=-= --
 
 -- Authors 
 
